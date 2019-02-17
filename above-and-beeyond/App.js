@@ -1,15 +1,26 @@
 import React, {Component} from 'react';
 import { Alert, StyleSheet, Text, ScrollView, View, Button, Image } from 'react-native';
-
 export default class App extends Component {
-  state = {
-    textValue: 'Content has not been modified yet',
+  constructor (){
+    super()
+    this.state = {
+      textValue : 'Content has not been modified yet',
+    }
   }
 
-  onPress = () => {
+  buttonPressed(text) {
+    console.log(text)
     this.setState({
-      textValue: 'Content has been modified'
+      textValue: text,
     })
+
+    if(text == 'Events'){
+       this.setState({
+         name: 'CUHacking 2019',
+         description: 'Carleton Hackathon',
+         date: 'Todays date',
+        })
+    }
   }
 
   render() {
@@ -18,49 +29,64 @@ export default class App extends Component {
     };
     return (
       <ScrollView style={styles.background}>
-      <Text style={styles.title}>Above and Beeyond</Text>
+      <View style = {styles.title}>
+      <Text style = {styles.big}>Above-and-Beeyond</Text>
       <Image source={pic} style={styles.icon}/>
-      <Button title="Home" content="Home has been clicked" onPress={this.onPress}/>
-      <Button title="Events" content="Events has been clicked" onPress={this.onPress}/>
-      <Button title="Learn" content="Learn has been clicked" onPress={this.onPress}/>
-      <Button title="About" content="About has been clicked" onPress={this.onPress}/>
-      <Button title="Contact" content="Contact has been clicked" onPress={this.onPress}/>
-      <Button title="Click me" onPress={this.onPress}/>
+      </View>
+      <View style = {styles.container}>
+      <View style = {styles.buttonContainer}>
+      <Button style={styles.homeStyles} title="Home" content="Home has been clicked" onPress={() => this.buttonPressed('Home')}/>
+      </View>
+      <View style = {styles.buttonContainer}>
+      <Button title="Events" content="Events has been clicked" onPress={() => this.buttonPressed('Events')}/>
+      </View>
+      <View style = {styles.buttonContainer}>
+      <Button title="Learn" content="Learn has been clicked" onPress={() => this.buttonPressed('Learn')}/>
+      </View>
+      <View style = {styles.buttonContainer}>
+      <Button title="About" content="About has been clicked" onPress={() => this.buttonPressed('About')}/>
+      </View>
+      <View style = {styles.buttonContainer}>
+      <Button title="Contact" content="Contact has been clicked" onPress={() => this.buttonPressed('Contact')}/>
+      </View>
+      </View>
+      <View style = {styles.content}>
       <Text>{this.state.textValue}</Text>
+      <Text>{this.state.name}</Text>
+      </View>
+
       </ScrollView>
 
     );
   }
 }
 
-class ContentWindow extends Component {
-  render() {
-    return(
-      <Text style={styles.placeholder}>Hello, World!</Text>
-    );
-  }
-}
-
-class MyClass extends Component {
-  render() {
-    return (
-      <Text>{this.props.name}</Text>
-    );
-  }
-}
+//class ContentWindow extends Component {
+//  render() {
+//    return(
+//      <Text style={styles.placeholder}>Hello, World!</Text>
+//    );
+//  }
+//}
 
 const styles = StyleSheet.create({
+
+  big: {
+    fontSize: 30,
+  },
+
   title: {
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    alignContent: 'center',
   },
 
   icon: {
     width: 100,
     height: 100,
     flexDirection: 'column',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 
@@ -68,7 +94,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'yellow',
   },
 
-  placeholder: {
-    fontSize: 100
+  container: {
+  flex: 1,
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyContent: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+  },
+
+  content: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignContent: 'center',
   }
 });
