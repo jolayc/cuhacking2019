@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { Alert, StyleSheet, Text, ScrollView, View, Button, Image } from 'react-native';
+import data from './events.json'
+
 export default class App extends Component {
   constructor (){
     super()
