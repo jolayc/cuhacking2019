@@ -1,62 +1,74 @@
 import React, {Component} from 'react';
-import { StyleSheet, Text, ScrollView, View, Button, Image } from 'react-native';
+import { Alert, StyleSheet, Text, ScrollView, View, Button, Image } from 'react-native';
 
 export default class App extends Component {
+  state = {
+    textValue: 'Content has not been modified yet',
+  }
+
+  onPress = () => {
+    this.setState({
+      textValue: 'Content has been modified'
+    })
+  }
+
   render() {
     let pic = {
       uri: 'https://raw.githubusercontent.com/BenFranklinthe1st/above-and-beeyond/master/Above%20and%20Beyond/A%2BA.png'
     };
     return (
-      <ScrollView>
-      <Image source={pic} style={{width: 100, height: 100}}/>
-      <View style={{width: 1000, height: 50, backgroundColor: 'powderblue'}} />
-      <Text>Above-and-Beeyond</Text>
-      <Button
-      onPress={() => {
-      Alert.alert('You tapped the button!');
-      }}
-      title="Home"
-      />
-      <Button
-      onPress={() => {
-      Alert.alert('You tapped the button!');
-      }}
-      title="Events"
-      />
-      <Button
-      onPress={() => {
-      Alert.alert('You tapped the button!');
-      }}
-      title="Learn"
-      />
-        <Greeting name='Rexxar' />
-        <Greeting name='Jaina' />
-        <Greeting name='Valeera' />
+      <ScrollView style={styles.background}>
+      <Text style={styles.title}>Above and Beeyond</Text>
+      <Image source={pic} style={styles.icon}/>
+      <Button title="Home" content="Home has been clicked" onPress={this.onPress}/>
+      <Button title="Events" content="Events has been clicked" onPress={this.onPress}/>
+      <Button title="Learn" content="Learn has been clicked" onPress={this.onPress}/>
+      <Button title="About" content="About has been clicked" onPress={this.onPress}/>
+      <Button title="Contact" content="Contact has been clicked" onPress={this.onPress}/>
+      <Button title="Click me" onPress={this.onPress}/>
+      <Text>{this.state.textValue}</Text>
       </ScrollView>
 
     );
   }
 }
 
-class Greeting extends Component {
+class ContentWindow extends Component {
+  render() {
+    return(
+      <Text style={styles.placeholder}>Hello, World!</Text>
+    );
+  }
+}
+
+class MyClass extends Component {
   render() {
     return (
-      <ScrollView>
-      <Text>Home</Text>
-      <Text>Events</Text>
-      <Text>Learn</Text>
-      <Text>About</Text>
-      <Text>Hello {this.props.name}!</Text>
-      </ScrollView>
+      <Text>{this.props.name}</Text>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ffeb3b',
-    alignItems: 'center',
+  title: {
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
   },
+
+  icon: {
+    width: 100,
+    height: 100,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  background: {
+    backgroundColor: 'yellow',
+  },
+
+  placeholder: {
+    fontSize: 100
+  }
 });
